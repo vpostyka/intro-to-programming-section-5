@@ -13,3 +13,8 @@ main {
 #reset {
   margin: 20px;
 }
+
+#out-of-range {
+  color: red;
+}
+
