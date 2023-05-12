@@ -19,19 +19,20 @@ function getRandomNumber(min, max) {
 
 function checkGuess() {
   const guess = parseInt(guessInput.value, 10);
-  if (guess < 1 || guess > 100) {
-    //hideAllMessages(); not sure how it should work what if i type more than 100 after few tries what should show?
+
+  if (isNaN(guess) || guess < 1 || guess > 100) {
     outOfRangeMessage.style.display = '';
     guessInput.value = '';
     return;
   }
+
   attempts = attempts + 1;
 
   hideAllMessages();
 
   if (guess === targetNumber) {
     numberOfGuessesMessage.style.display = '';
-    numberOfGuessesMessage.innerHTML = `You made ${attempts} guesses`;
+    numberOfGuessesMessage.innerHTML = `You made ${attempts} ${attempts === 1 ? 'guess' : 'guesses'}`;
 
     correctMessage.style.display = '';
 
@@ -49,10 +50,11 @@ function checkGuess() {
     const remainingAttempts = maxNumberOfAttempts - attempts;
 
     numberOfGuessesMessage.style.display = '';
-    numberOfGuessesMessage.innerHTML = `You guessed ${guess}. <br> ${remainingAttempts} guesses remaining`;
+    numberOfGuessesMessage.innerHTML = `You guessed ${guess}. <br> ${remainingAttempts} ${remainingAttempts === 1 ? 'guess' : 'guesses'} remaining`;
   }
 
   if (attempts === maxNumberOfAttempts) {
+    maxGuessesMessage.style.display = '';
     submitButton.disabled = true;
     guessInput.disabled = true;
   }
@@ -61,6 +63,7 @@ function checkGuess() {
 
   resetButton.style.display = '';
 }
+
 
 function hideAllMessages() {
   for (let elementIndex = 0; elementIndex < messages.length; elementIndex++) {
